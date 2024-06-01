@@ -14,4 +14,4 @@ export const likesSchema :Schema<ILikes>= new Schema({
     likedBy: [{ type: Schema.Types.ObjectId, ref: "User" }]
 });
 
-export const likesModel = (mongoose.models.Like as mongoose.Model<ILikes>) ||  mongoose.model<ILikes>('Likes', likesSchema);
+export const likesModel = (mongoose.models.Like as mongoose.Model<ILikes>) ||  mongoose.model<ILikes>('Like', likesSchema);

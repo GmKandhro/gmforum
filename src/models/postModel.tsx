@@ -1,15 +1,14 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
-import { ICommands, commandSchema } from "./commandsModel";
+import { Icomments, commentSchema } from "./commentsModel";
 import { ILikes, likesSchema } from "./likesModel";
 import { IUser, userSchema } from "./userModel";
 
 export interface IPost extends Document {
     title: string;
     content: string;
-    thumbnail:string;
-    author:Schema.Types.ObjectId;
-    likes: Schema.Types.ObjectId;
-    commands: Schema.Types.ObjectId
+    author:string;
+    likes: Number;
+    comments: Schema.Types.ObjectId
 }
 
 const postSchema: Schema<IPost> = new Schema({
@@ -21,14 +20,14 @@ const postSchema: Schema<IPost> = new Schema({
         type: String,
         required: true,
     },
-    thumbnail: {
-        type:String,
-        required:true
+   
+    author: { type:String,required:true },
+    likes: {
+        type:Number,
+        default:0
     },
-    author: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    likes: [{ type: Schema.Types.ObjectId, ref: "Like" }],
-    commands:[{ type: Schema.Types.ObjectId, ref: "Command" }]
+    comments:[{ type: Schema.Types.ObjectId, ref: "Comment" }]
 },{timestamps:true});
 
 
-export const postModel = (mongoose.models.Post as mongoose.Model<IUser>) ||  mongoose.model<IPost>('Post', postSchema);
+export const postModel = (mongoose.models.Post as mongoose.Model<IPost>) ||  mongoose.model<IPost>('Post', postSchema);

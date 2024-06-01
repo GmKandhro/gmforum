@@ -3,13 +3,13 @@ import { IUser, userSchema } from "./userModel";
 import { IPost } from "./postModel";
 import { postSchema } from "@/schemas/postSchema";
 
-export interface ICommands extends Document {
+export interface Icomments extends Document {
    content:string;
    user: Schema.Types.ObjectId;
    post:Schema.Types.ObjectId;
 }
 
-export const commandSchema: Schema<ICommands> = new Schema({
+export const commentSchema: Schema<Icomments> = new Schema({
     content: {
         type: String,
         required: true,
@@ -18,5 +18,5 @@ export const commandSchema: Schema<ICommands> = new Schema({
     user: [{ type: Schema.Types.ObjectId, ref: "User" }]
 });
 
-export const commandModel = (mongoose.models.Command as mongoose.Model<ICommands>) ||  mongoose.model<ICommands>('Command', commandSchema);
+export const commentModel = (mongoose.models.Comment as mongoose.Model<Icomments>) ||  mongoose.model<Icomments>('Comment', commentSchema);
 
